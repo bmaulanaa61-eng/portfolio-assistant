@@ -78,7 +78,7 @@ class AssistantService:
         self.api_key = (os.getenv("AI_API_KEY") or "").strip()
         self.base_url = (os.getenv("AI_BASE_URL") or "https://generativelanguage.googleapis.com/v1beta/openai/").strip()
         model_env = (os.getenv("AI_MODEL_NAME") or "").strip()
-        self.model = model_env if model_env else "gemini-2.0-flash"
+        self.model = model_env if model_env else "gemini-3.5-flash-lite"
         raw_timeout = (os.getenv("LLM_TIMEOUT_SECONDS") or "").strip()
         try:
             self.timeout_seconds = float(raw_timeout) if raw_timeout else 25.0
