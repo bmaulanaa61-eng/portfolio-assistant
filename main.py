@@ -59,7 +59,7 @@ async def chat(payload: ChatRequest, request: Request) -> ChatResponse:
     except HTTPException:
         raise
     except Exception as exc:
-        raise HTTPException(status_code=502, detail="Assistant backend failed to generate a response.") from exc
+        raise HTTPException(status_code=502, detail=f"Assistant backend error: {exc}") from exc
 
     return ChatResponse(reply=privacy_filter(reply), suggestions=DEFAULT_SUGGESTIONS, source="gemini")
 
@@ -74,8 +74,8 @@ async def stream_generator(message: str):
     except HTTPException as exc:
         data = json.dumps({"error": exc.detail})
         yield f"data: {data}\n\n"
-    except Exception:
-        data = json.dumps({"error": "Assistant backend failed to generate a response."})
+    except Exception as exc:
+        data = json.dumps({"error": f"Assistant backend error: {exc}"})
         yield f"data: {data}\n\n"
 
 
