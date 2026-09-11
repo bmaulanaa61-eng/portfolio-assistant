@@ -38,10 +38,9 @@ def env_int(name: str, default: int) -> int:
 
 
 def parse_allowed_origins() -> list[str]:
-    raw = os.getenv(
-        "ALLOWED_ORIGINS",
-        "http://localhost:3000,http://localhost:5173,https://datalabs-systems.web.app,https://datalabs-systems.firebaseapp.com",
-    )
+    raw = (os.getenv("ALLOWED_ORIGINS") or "").strip()
+    if not raw:
+        raw = "http://localhost:3000,http://localhost:5173,https://datalabs-systems.web.app,https://datalabs-systems.firebaseapp.com"
     return [item.strip().rstrip("/") for item in raw.split(",") if item.strip()]
 
 

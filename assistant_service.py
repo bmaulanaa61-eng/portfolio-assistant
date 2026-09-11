@@ -75,10 +75,15 @@ def load_system_prompt() -> str:
 
 class AssistantService:
     def __init__(self) -> None:
-        self.api_key = os.getenv("AI_API_KEY")
-        self.base_url = os.getenv("AI_BASE_URL", "https://generativelanguage.googleapis.com/v1beta/openai/")
-        self.model = os.getenv("AI_MODEL_NAME", "gemini-3.5-flash-lite")
-        self.timeout_seconds = float(os.getenv("LLM_TIMEOUT_SECONDS", "25"))
+        self.api_key = (os.getenv("AI_API_KEY") or "").strip()
+        self.base_url = (os.getenv("AI_BASE_URL") or "https://generativelanguage.googleapis.com/v1beta/openai/").strip()
+        model_env = (os.getenv("AI_MODEL_NAME") or "").strip()
+        self.model = model_env if model_env else "gemini-2.0-flash"
+        raw_timeout = (os.getenv("LLM_TIMEOUT_SECONDS") or "").strip()
+        try:
+            self.timeout_seconds = float(raw_timeout) if raw_timeout else 25.0
+        except ValueError:
+            self.timeout_seconds = 25.0
         self.system_prompt = load_system_prompt()
         self.client = AsyncOpenAI(api_key=self.api_key or "missing", base_url=self.base_url)
 
