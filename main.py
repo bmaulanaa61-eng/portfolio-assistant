@@ -24,7 +24,9 @@ rate_limiter = InMemoryRateLimiter()
 assistant_service = AssistantService()
 
 
+@app.get("/")
 @app.get("/health")
+@app.get("/api/health")
 async def health() -> dict[str, object]:
     return {
         "status": "ok",
