@@ -74,6 +74,22 @@ class SecurityTests(unittest.TestCase):
         finally:
             main.assistant_service.chat = original_service_chat
 
+    def test_stream_endpoint_returns_events(self):
+        async def fake_stream(message: str):
+            yield "Halo "
+            yield "dunia"
+
+        original_stream = main.assistant_service.chat_stream
+        main.assistant_service.chat_stream = fake_stream
+        try:
+            with self.client.stream("POST", "/api/chat/stream", json={"message": "Halo"}) as response:
+                self.assertEqual(response.status_code, 200)
+                lines = [line for line in response.iter_lines() if line]
+                self.assertTrue(len(lines) > 0)
+                self.assertTrue(any("data:" in line for line in lines))
+        finally:
+            main.assistant_service.chat_stream = original_stream
+
 
 if __name__ == "__main__":
     unittest.main()
