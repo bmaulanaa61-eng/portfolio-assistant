@@ -21,6 +21,8 @@ DEFAULT_SUGGESTIONS = [
     "Jelaskan ATHENA AML",
     "Jelaskan dashboard Metabase",
     "Jelaskan database & ETL",
+    "Jelaskan operasional SPMB",
+    "Jelaskan situs warga RW 05",
     "Apa prinsip engineering Bagas?",
 ]
 
@@ -45,7 +47,7 @@ You represent Bagas's portfolio: profile, technical capabilities, engineering pr
 ## Core Profile
 - Name: Bagas Maulana
 - Role: AI & Data Engineer
-- Projects: ATHENA AML, GenAI RAG Dokumen & Text2SQL, Data Warehouse to AI Analytics, Dashboard Metabase untuk Dinas Pendidikan, Database Multi-Tenant & ETL.
+- Projects: ATHENA AML, GenAI RAG Dokumen & Text2SQL, Data Warehouse to AI Analytics, Dashboard Metabase untuk Dinas Pendidikan, Database Multi-Tenant & ETL, Situs Warga RW 05 Tambakaji. Pengalaman operasional: Database SPMB.
 
 ## Strict Privacy & Contact Rules
 - Email: bmaulanaa61@gmail.com
